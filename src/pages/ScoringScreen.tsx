@@ -165,13 +165,88 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
   }
 
   function handleAcceptOut() {
-    // User skipped review - wicket is final
+    // User skipped review - wicket is final and already recorded
+    // The issue: when the wicket was recorded, reviewPending=true blocked innings completion
+    // AND a new over was created. We need to manually fix the match state.
+    
+    const currentInnings = getCurrentInnings(match);
+    const config = match.config;
+    
+    // Check if innings SHOULD be complete with this wicket
+    const outOfWickets = currentInnings.totalWickets >= config.totalWickets;
+    const outOfOvers = currentInnings.overs.length >= config.totalOvers;
+    const targetChased = currentInnings.target !== undefined && currentInnings.totalRuns > currentInnings.target;
+    const shouldBeComplete = outOfWickets || outOfOvers || targetChased;
+    
+    console.log('🔴 Accept Out - checking completion:', {
+      totalWickets: currentInnings.totalWickets,
+      maxWickets: config.totalWickets,
+      outOfWickets,
+      outOfOvers,
+      shouldBeComplete
+    });
+    
+    if (shouldBeComplete && !currentInnings.isComplete) {
+      // Manually mark innings as complete and trigger phase advancement
+      const inningsKey = match.currentInnings === 1 ? 'innings1' : 'innings2';
+      const completedInnings = {
+        ...currentInnings,
+        isComplete: true,
+        currentOver: null, // Clear the incorrectly created new over
+      };
+      
+      // Advance phase manually since engine didn't do it
+      let updatedMatch = { ...match, [inningsKey]: completedInnings };
+      
+      if (match.currentInnings === 1) {
+        // Create innings 2
+        const target = completedInnings.totalRuns + 1;
+        const battingTeam = match.bowlingTeam;
+        const bowlingTeam = match.battingTeam;
+        updatedMatch = {
+          ...updatedMatch,
+          phase: 'innings2' as const,
+          innings2: {
+            teamName: battingTeam,
+            target,
+            overs: [],
+            currentOver: { overNumber: 1, balls: [], overRuns: 0, wicketsInOver: 0, impactApplied: false, lastBallTwistApplied: false },
+            totalRuns: 0,
+            totalWickets: 0,
+            totalBalls: 0,
+            reviewsLeft: config.totalReviews,
+            isComplete: false,
+          },
+          currentInnings: 2,
+          battingTeam,
+          bowlingTeam,
+        };
+      } else {
+        // Match complete
+        const inn1 = updatedMatch.innings1;
+        const inn2 = completedInnings;
+        let winner = '';
+        if (inn2.totalRuns > inn1.totalRuns) {
+          const wkLeft = config.totalWickets - inn2.totalWickets;
+          winner = `${inn2.teamName} won by ${wkLeft} wicket${wkLeft !== 1 ? 's' : ''}`;
+        } else if (inn1.totalRuns > inn2.totalRuns) {
+          const diff = inn1.totalRuns - inn2.totalRuns;
+          winner = `${inn1.teamName} won by ${diff} run${diff !== 1 ? 's' : ''}`;
+        } else {
+          winner = 'Match Tied!';
+        }
+        updatedMatch = {
+          ...updatedMatch,
+          phase: 'result' as const,
+          innings2: { ...inn2, wonBy: winner },
+        };
+      }
+      
+      saveMatch(updatedMatch);
+      onMatchUpdate(updatedMatch);
+    }
+    
     setPendingWicket(false);
-    
-    // Now check if innings is complete
-    const newInnings = getCurrentInnings(match);
-    checkOverOrInningsComplete(match, newInnings);
-    
     setMode('normal');
   }
 
@@ -245,7 +320,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
                   className={`card-btn ${v === 'W' ? 'card-wicket' : ''} ${v === 4 ? 'card-four' : ''} ${v === 6 ? 'card-six' : ''}`}
                   onClick={() => handleCardTap(v)}
                 >
-                  <span className="card-value">{v === 'W' ? '💀' : v}</span>
+                  <span className="card-value">{v === 'W' ? '⚡' : v}</span>
                   <span className="card-sublabel">{v === 'W' ? 'Wicket' : v === 0 ? 'Dot' : `Run${v !== 1 ? 's' : ''}`}</span>
                 </button>
               ))}
@@ -260,7 +335,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
               {IMPACT_CARD_OPTIONS.map((effect, i) => (
                 <button key={i} className={`impact-btn impact-${effect.type}`} onClick={() => handleImpactCard(effect)}>
                   <span className="impact-icon">
-                    {effect.type === 'runs_add' ? '➕' : effect.type === 'runs_deduct' ? '➖' : effect.type === 'over_double' ? '×2' : '💀'}
+                    {effect.type === 'runs_add' ? '➕' : effect.type === 'runs_deduct' ? '➖' : effect.type === 'over_double' ? '×2' : '⚡'}
                   </span>
                   <span className="impact-text">{impactLabel(effect)}</span>
                 </button>
@@ -295,7 +370,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
                   className={`card-btn lastball-card ${v === 'W' ? 'card-wicket' : ''} ${v === 4 ? 'card-four' : ''} ${v === 6 ? 'card-six' : ''}`}
                   onClick={() => handleCardTap(v, true)}
                 >
-                  <span className="card-value">{v === 'W' ? '💀' : v}</span>
+                  <span className="card-value">{v === 'W' ? '⚡' : v}</span>
                   <span className="card-sublabel">{v === 'W' ? 'Wicket' : v === 0 ? 'Dot' : `Run${v !== 1 ? 's' : ''}`}</span>
                 </button>
               ))}
@@ -314,7 +389,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
             <div className="review-result-btns">
               <p className="review-hint">Draw a review card — what does it say?</p>
               <button className="review-result not-out" onClick={() => handleReview('not_out')}>✅ NOT OUT — Batter survives</button>
-              <button className="review-result out"     onClick={() => handleReview('out')}>💀 OUT — Wicket confirmed</button>
+              <button className="review-result out"     onClick={() => handleReview('out')}>⚡ OUT — Wicket confirmed</button>
             </div>
           </div>
         )}

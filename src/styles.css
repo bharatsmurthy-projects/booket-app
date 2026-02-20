@@ -2,9 +2,9 @@
 
 /* ═══════════════════════════════════════════════════
    BOOKET — 3 Themes × Dark/Light
+   theme-booket (brand default: cricket blue + booket red)
    theme-green  (cricket pitch)
-   theme-blue   (India jersey: royal blue + amber)
-   theme-rose   (rose white + deep rose red)
+   theme-blue   (India jersey: royal blue + saffron)
 ═══════════════════════════════════════════════════ */
 
 /* ── Theme: Green (default) ─────────────────────── */
@@ -55,28 +55,28 @@
   --input-bg:   #0e1830;
 }
 
-/* ── Theme: Rose ────────────────────────────────── */
-.theme-rose {
-  --bg:          #1a0a10;
-  --surface:     #2d1520;
-  --surface-mid: #3d1f2c;
-  --surface-hi:  #4e2838;
-  --accent:      #e07b8f;
-  --accent-dark: #b85d70;
-  --accent2:     #f4a0b0;
-  --danger:      #c0392b;
-  --text:        #fdf0f3;
-  --text-dim:    #c490a0;
-  --card-bg:     #ffffff;
-  --card-text:   #2d1520;
-  --card-border: #f0d0d8;
-  --input-bg:    #fdf5f7;
+/* ── Theme: Booket (Brand Default) ──────────────── */
+.theme-booket {
+  --bg:          #1F3E54;   /* Deep Cricket Blue */
+  --surface:     #2F5D7C;   /* Cricket Blue */
+  --surface-mid: #3d7092;
+  --surface-hi:  #5a8ba8;   /* Lighter for better contrast */
+  --accent:      #D9654F;   /* Lightened Booket Red for better contrast */
+  --accent-dark: #a03d38;
+  --accent2:     #D9C7A8;   /* Warm Beige */
+  --danger:      #E86B5B;   /* Lighter red for accessibility */
+  --text:        #FFFFFF;   /* Pure white for max contrast on blue */
+  --text-dim:    #D9C7A8;   /* Warm beige for secondary text */
+  --card-bg:     #F4E9D5;   /* Vintage Cream cards */
+  --card-text:   #1F3E54;   /* Dark blue on cream = excellent contrast */
+  --card-border: #C94F4A;
+  --input-bg:    #FFFFFF;   /* White input backgrounds */
 }
-.theme-rose.dark {
-  --card-bg:    #2d1520;
-  --card-text:  #fdf0f3;
-  --card-border:#4e2838;
-  --input-bg:   #1a0a10;
+.theme-booket.dark {
+  --card-bg:    #3d7092;    /* Medium blue for dark mode cards */
+  --card-text:  #FFFFFF;    /* White text on blue */
+  --card-border:#5a8ba8;
+  --input-bg:   #2F5D7C;
 }
 
 /* ── Shared tokens (derived from theme vars) ────── */
@@ -154,6 +154,14 @@ input { font-family: var(--font-b); }
   background: none;
   padding: 0;
   line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .header-controls { display: flex; align-items: center; gap: 10px; }
@@ -195,7 +203,7 @@ input { font-family: var(--font-b); }
   display: block; width: 100%;
   padding: 18px 24px;
   background: var(--accent);
-  color: var(--bg);
+  color: #FFFFFF;  /* White text for accessibility */
   font-family: var(--font-d);
   font-size: 24px; letter-spacing: 2px;
   border-radius: var(--radius);
@@ -227,10 +235,18 @@ input { font-family: var(--font-b); }
   display: flex; flex-direction: column; align-items: center;
   text-align: center; padding: 52px 0 40px; gap: 14px;
 }
-.home-logo { display: flex; align-items: center; gap: 14px; }
-.logo-emoji { font-size: 56px; line-height: 1; }
-.logo-text  { font-family: var(--font-d); font-size: 72px; letter-spacing: 8px; color: var(--accent); line-height: 1; }
-.home-tagline { font-size: 13px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
+.home-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.home-logo-img { 
+  height: 120px; 
+  width: auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+.home-tagline { 
+  font-size: 14px; 
+  font-weight: 600;
+  color: var(--text); 
+  letter-spacing: 1px; 
+}
 .matches-section { margin-top: 28px; }
 .section-title {
   font-size: 13px; font-weight: 700; color: var(--text-dim);

@@ -26,10 +26,9 @@ export default function HomeScreen({ onNewMatch, onResumeMatch }: Props) {
       {/* Hero */}
       <div className="home-hero">
         <div className="home-logo">
-          <span className="logo-emoji">🃏</span>
-          <span className="logo-text">BOOKET</span>
+          <img src="/images/booket-logo.png" alt="BOOKET" className="home-logo-img" />
         </div>
-        <p className="home-tagline">Card Cricket. Offline. Legendary.</p>
+        <p className="home-tagline">The Book Cricket Card Game</p>
         <button className="btn-primary btn-xl" onClick={onNewMatch}>
           🏏 New Match
         </button>

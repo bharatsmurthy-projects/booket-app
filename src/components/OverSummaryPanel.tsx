@@ -58,7 +58,7 @@ export default function OverSummaryPanel({ over, innings, onDismiss }: Props) {
         {/* Wickets */}
         {over.wicketsInOver > 0 && (
           <div className="os-wickets">
-            💀 {over.wicketsInOver} wicket{over.wicketsInOver > 1 ? 's' : ''} this over
+            ⚡ {over.wicketsInOver} wicket{over.wicketsInOver > 1 ? 's' : ''} this over
           </div>
         )}
 

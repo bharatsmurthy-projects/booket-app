@@ -8,19 +8,19 @@ import ScoringScreen from './pages/ScoringScreen';
 import ResultScreen from './pages/ResultScreen';
 
 type AppView  = 'home' | 'setup' | 'scoring' | 'result';
-export type ThemeColor = 'green' | 'blue' | 'rose';
+export type ThemeColor = 'booket' | 'green' | 'blue';
 
 const THEME_OPTIONS: { id: ThemeColor; label: string; emoji: string }[] = [
-  { id: 'green', label: 'Pitch',  emoji: '🌿' },
-  { id: 'blue',  label: 'India',  emoji: '🔵' },
-  { id: 'rose',  label: 'Rose',   emoji: '🌸' },
+  { id: 'booket', label: 'Booket', emoji: '🏏' },
+  { id: 'green',  label: 'Pitch',  emoji: '🌿' },
+  { id: 'blue',   label: 'India',  emoji: '🔵' },
 ];
 
 export default function App() {
   const [view,      setView]      = useState<AppView>('home');
   const [match,     setMatch]     = useState<MatchState | null>(null);
   const [darkMode,  setDarkMode]  = useState(false);
-  const [theme,     setTheme]     = useState<ThemeColor>('green');
+  const [theme,     setTheme]     = useState<ThemeColor>('booket');
 
   function handleStartMatch(config: MatchConfig) {
     const newMatch = createMatch(config);
@@ -39,7 +39,9 @@ export default function App() {
   return (
     <div className={`app theme-${theme} ${darkMode ? 'dark' : 'light'}`}>
       <header className="app-header">
-        <button className="header-home-btn" onClick={handleHome}>🃏 BOOKET</button>
+        <button className="header-home-btn" onClick={handleHome}>
+          <img src="/images/booket-logo.png" alt="BOOKET" className="header-logo" />
+        </button>
         <div className="header-controls">
           {/* Theme picker */}
           <div className="theme-pills">
