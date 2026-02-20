@@ -121,10 +121,37 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
     setMode('normal');
     const newInnings = getCurrentInnings(newMatch);
     
+    // Check if wicket from impact card needs review
     if (effect.type === 'wicket' && newInnings.reviewsLeft > 0) {
       setPendingWicket(true);
       saveMatch(newMatch);
       onMatchUpdate(newMatch);
+      return;
+    }
+    
+    // CRITICAL: Check if impact card runs won the match
+    const isChasing = newMatch.currentInnings === 2;
+    const targetChased = isChasing && newInnings.target && newInnings.totalRuns >= newInnings.target;
+    
+    if (targetChased) {
+      // Match won! Manually create result state
+      const inn1 = newMatch.innings1;
+      const inn2 = newInnings;
+      const wkLeft = config.totalWickets - inn2.totalWickets;
+      const winner = `${inn2.teamName} won by ${wkLeft} wicket${wkLeft !== 1 ? 's' : ''}`;
+      
+      const completedMatch: MatchState = {
+        ...newMatch,
+        phase: 'result',
+        innings2: {
+          ...inn2,
+          isComplete: true,
+          wonBy: winner,
+        },
+      };
+      
+      saveMatch(completedMatch);
+      onMatchUpdate(completedMatch);
       return;
     }
     
@@ -341,7 +368,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
                 </button>
               ))}
               <div className="impact-custom">
-                <span className="impact-custom-label">Other amount</span>
+                <span className="impact-custom-label">Custom Runs</span>
                 <div className="impact-custom-row">
                   <input
                     ref={customInputRef}

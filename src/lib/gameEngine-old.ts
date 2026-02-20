@@ -333,7 +333,7 @@ function updateInningsWithBall(state: MatchState, ball: BallEvent): MatchState {
   const outOfWickets  = newTotalWickets >= config.totalWickets;
   const completedOvers = innings.overs.length + (overComplete ? 1 : 0);
   const outOfOvers    = completedOvers >= config.totalOvers;
-  const targetChased  = innings.target !== undefined && newTotalRuns >= innings.target;
+  const targetChased  = innings.target !== undefined && newTotalRuns > innings.target;
   
   // Check if review is pending
   const reviewsAvailable = innings.reviewsLeft > 0;

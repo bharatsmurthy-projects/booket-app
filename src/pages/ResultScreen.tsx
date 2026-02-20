@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { MatchState, InningsData, OverSummary } from '../types';
 import { impactLabel } from '../lib/gameEngine';
 
@@ -15,6 +15,9 @@ export default function ResultScreen({ match, onNewMatch, onHome }: Props) {
 
   return (
     <div className="result-screen">
+      {/* Confetti animation */}
+      <Confetti />
+      
       {/* Winner banner */}
       <div className="result-banner">
         <div className="result-trophy">🏆</div>
@@ -36,6 +39,41 @@ export default function ResultScreen({ match, onNewMatch, onHome }: Props) {
           🏠 Home
         </button>
       </div>
+    </div>
+  );
+}
+
+// ─── Confetti Component ───────────────────────────────────────────────────────
+function Confetti() {
+  const [pieces, setPieces] = useState<Array<{id: number; left: number; delay: number; duration: number; color: string}>>([]);
+
+  useEffect(() => {
+    // Generate 50 confetti pieces
+    const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100, // Random horizontal position (0-100%)
+      delay: Math.random() * 0.5, // Random delay (0-0.5s)
+      duration: 2 + Math.random() * 1, // Random duration (2-3s)
+      color: ['#ffd700', '#ff8c00', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'][Math.floor(Math.random() * 6)]
+    }));
+    
+    setPieces(confettiPieces);
+  }, []);
+
+  return (
+    <div className="confetti-container">
+      {pieces.map(piece => (
+        <div
+          key={piece.id}
+          className="confetti-piece"
+          style={{
+            left: `${piece.left}%`,
+            animationDelay: `${piece.delay}s`,
+            animationDuration: `${piece.duration}s`,
+            backgroundColor: piece.color
+          }}
+        />
+      ))}
     </div>
   );
 }

@@ -224,7 +224,11 @@ input { font-family: var(--font-b); }
 .btn-secondary:hover { background: rgba(255,255,255,0.06); }
 .btn-row  { display: flex; gap: 12px; }
 .btn-xl   { font-size: 28px; padding: 22px; }
-.btn-start { background: var(--accent) !important; box-shadow: 0 5px 0 var(--accent-dark) !important; color: #fff !important; }
+.btn-start { 
+  background: var(--accent) !important; 
+  box-shadow: 0 5px 0 var(--accent-dark) !important; 
+  color: #fff !important; 
+}
 
 /* ── Home Screen ───────────────────────────────── */
 .home-screen {
@@ -441,8 +445,7 @@ input { font-family: var(--font-b); }
   text-align: center; letter-spacing: 0.5px; flex-shrink: 0;
 }
 
-
-/* ── Card Grid: Clean 2-row layout ───────────────── */
+/* ── Card Grid: 2-row layout with flames ──────────── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -450,49 +453,123 @@ input { font-family: var(--font-b); }
   gap: 10px 8px;
   flex: 1;
   min-height: 0;
+  padding: 4px 0 8px;
 }
 
+/* Base cricket ball style */
 .card-btn {
-  border-radius: var(--radius);
-  background: var(--card-bg);
-  color: var(--card-text);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
-  box-shadow: var(--shadow);
-  border: 2px solid transparent;
-  transition: var(--ease);
-  width: 100%;
-  height: 100%;
-  min-height: 0;
+  
+  border: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  
+  /* Default: Standard red cricket ball */
+  background: radial-gradient(circle at 30% 30%, #e86b67 0%, #c94f4a 50%, #a03d38 100%);
+  
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.3),
+    inset -3px -3px 6px rgba(0,0,0,0.3),
+    inset 2px 2px 6px rgba(255,255,255,0.2);
 }
 
+/* Cricket ball stitching - primary seam */
+.card-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0.7) 10%, 
+    rgba(255,255,255,0.7) 90%, 
+    transparent 100%
+  );
+  transform: translateY(-50%);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+/* Cricket ball stitching - angled seam */
+.card-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0.7) 10%, 
+    rgba(255,255,255,0.7) 90%, 
+    transparent 100%
+  );
+  transform: translateY(-50%) rotate(18deg);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+/* Hover - ball lifts */
 .card-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 
+    0 6px 12px rgba(0,0,0,0.4),
+    inset -3px -3px 6px rgba(0,0,0,0.3),
+    inset 2px 2px 8px rgba(255,255,255,0.25);
 }
 
+/* Active - ball pressed */
 .card-btn:active {
-  transform: scale(0.93);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.3),
+    inset -3px -3px 8px rgba(0,0,0,0.4),
+    inset 2px 2px 6px rgba(255,255,255,0.15);
 }
 
+/* Gold metallic text */
 .card-value {
   font-family: var(--font-d);
-  font-size: clamp(28px, 5vw, 44px);
   line-height: 1;
+  font-weight: 700;
+  
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 45%, #ffd700 55%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  
+  position: relative;
+  z-index: 3;
 }
 
 .card-sublabel {
-  font-size: clamp(9px, 1.8vw, 11px);
+  font-size: 9px;
   font-weight: 700;
-  color: #888;
+  color: rgba(255, 255, 255, 0.95);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 3;
 }
 
-/* Row 1: Standard runs (0,1,2,3) */
+/* ROW 1: Standard runs (0,1,2,3) - smaller, clean balls */
 .card-btn:nth-child(1),
 .card-btn:nth-child(2),
 .card-btn:nth-child(3),
@@ -505,67 +582,191 @@ input { font-family: var(--font-b); }
 .card-btn:nth-child(3) { grid-column: 3; }
 .card-btn:nth-child(4) { grid-column: 4; }
 
-/* Row 2: Power shots (4, 6, Wicket) */
+.card-btn:nth-child(1) .card-value,
+.card-btn:nth-child(2) .card-value,
+.card-btn:nth-child(3) .card-value,
+.card-btn:nth-child(4) .card-value {
+  font-size: clamp(32px, 6vw, 42px);
+}
+
+/* ROW 2: Power shots (4,6,W) - larger with flames */
 .card-four { grid-row: 2; grid-column: 1; }
 .card-six { grid-row: 2; grid-column: 2; }
 .card-wicket { grid-row: 2; grid-column: 3 / 5; }
 
-/* Special styling for power shots */
-.card-four {
-  background: #ebf8ff;
-  border-color: #3182ce;
-  color: #3182ce;
-}
-
-.card-six {
-  background: #fffbeb;
-  border-color: #d69e2e;
-  color: #b7791f;
-}
-
+.card-four,
+.card-six,
 .card-wicket {
-  background: #fff5f5;
-  border-color: var(--danger);
-  color: var(--danger);
+  transform: scale(1.1);
+  transform-origin: center;
+}
+
+.card-four:hover,
+.card-six:hover,
+.card-wicket:hover {
+  transform: translateY(-3px) scale(1.13);
+}
+
+.card-four:active,
+.card-six:active,
+.card-wicket:active {
+  transform: translateY(1px) scale(1.08);
+}
+
+.card-four .card-value,
+.card-six .card-value,
+.card-wicket .card-value {
+  font-size: clamp(38px, 7vw, 52px);
+}
+
+/* FOUR: Blue ball with blue flame */
+.card-four {
+  background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #3182ce 50%, #2563ab 100%);
+}
+
+.card-four::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 25px;
+  background: radial-gradient(ellipse at top, 
+    rgba(96, 165, 250, 0.8) 0%,
+    rgba(59, 130, 246, 0.6) 30%,
+    rgba(37, 99, 171, 0.3) 60%,
+    transparent 100%
+  );
+  filter: blur(4px);
+  z-index: 0;
+}
+
+.card-four .card-value {
+  background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+}
+
+/* SIX: Golden ball with orange flame */
+.card-six {
+  background: radial-gradient(circle at 30% 30%, #fde68a 0%, #fbbf24 50%, #d97706 100%);
+}
+
+.card-six::before {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 30px;
+  background: radial-gradient(ellipse at top, 
+    rgba(251, 191, 36, 0.9) 0%,
+    rgba(245, 158, 11, 0.7) 25%,
+    rgba(249, 115, 22, 0.5) 50%,
+    rgba(234, 88, 12, 0.3) 70%,
+    transparent 100%
+  );
+  filter: blur(5px);
+  z-index: 0;
+}
+
+.card-six .card-value {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 30%, #fde68a 60%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
+}
+
+.card-six .card-sublabel {
+  color: rgba(0, 0, 0, 0.75);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.4);
+}
+
+/* WICKET: Dark red ball with red flame */
+.card-wicket {
+  border-radius: 100px;
+  background: radial-gradient(ellipse at 30% 30%, #dc2626 0%, #991b1b 50%, #7f1d1d 100%);
+}
+
+.card-wicket::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 35px;
+  background: radial-gradient(ellipse at top, 
+    rgba(248, 113, 113, 0.9) 0%,
+    rgba(239, 68, 68, 0.7) 25%,
+    rgba(220, 38, 38, 0.5) 50%,
+    rgba(153, 27, 27, 0.3) 70%,
+    transparent 100%
+  );
+  filter: blur(6px);
+  z-index: 0;
+}
+
+.card-wicket::after {
+  height: 3px;
+  transform: translateY(-50%) rotate(8deg);
 }
 
 .card-wicket .card-value {
-  font-size: clamp(24px, 4.5vw, 36px);
+  font-size: clamp(34px, 6.5vw, 48px);
+  background: linear-gradient(135deg, #fca5a5 0%, #f87171 50%, #ef4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Last ball twist - purple border */
+/* Last ball twist - purple glow */
 .lastball-card {
-  border: 3px solid #a855f7 !important;
-  box-shadow: 0 0 0 2px #a855f7, var(--shadow) !important;
+  box-shadow: 
+    0 0 0 3px #a855f7,
+    0 4px 8px rgba(0,0,0,0.3),
+    0 0 25px rgba(168, 85, 247, 0.5),
+    inset -3px -3px 6px rgba(0,0,0,0.3),
+    inset 2px 2px 6px rgba(255,255,255,0.2);
+  animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
-.lastball-section .section-label {
-  color: #c084fc !important;
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 
+    0 0 0 3px #a855f7, 0 4px 8px rgba(0,0,0,0.3), 0 0 25px rgba(168, 85, 247, 0.5),
+    inset -3px -3px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.2); }
+  50% { box-shadow: 
+    0 0 0 3px #a855f7, 0 4px 8px rgba(0,0,0,0.3), 0 0 35px rgba(168, 85, 247, 0.7),
+    inset -3px -3px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.2); }
 }
 
-/* Dark mode adjustments */
+.lastball-section .section-label { color: #c084fc !important; }
+
+/* Dark mode */
 .dark .card-btn {
-  background: var(--surface-mid);
-  color: var(--text);
-  border-color: var(--surface-hi);
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.6),
+    inset -3px -3px 8px rgba(0,0,0,0.4),
+    inset 2px 2px 6px rgba(255,255,255,0.15);
 }
 
-.dark .card-four {
-  background: #1e3a5f;
-  border-color: #3182ce;
-  color: #60a5fa;
+.dark .card-btn:hover {
+  box-shadow: 
+    0 6px 12px rgba(0,0,0,0.7),
+    inset -3px -3px 8px rgba(0,0,0,0.4),
+    inset 2px 2px 8px rgba(255,255,255,0.2);
 }
 
-.dark .card-six {
-  background: #3d2f1f;
-  border-color: #d69e2e;
-  color: #fbbf24;
-}
-
-.dark .card-wicket {
-  background: #3d1f1f;
-  border-color: var(--danger);
-  color: #fc8181;
+.dark .card-four::before,
+.dark .card-six::before,
+.dark .card-wicket::before {
+  opacity: 1.2;
+  filter: blur(6px);
 }
 
 /* ── Impact Panel ───────────────────────────────── */
@@ -739,7 +940,7 @@ input { font-family: var(--font-b); }
 .anim-six    { background: rgba(236,201,75,0.92);  } .anim-six .anim-text    { color:#1a1a1a; }
 .anim-wicket { background: rgba(229,62,62,0.88);   } .anim-wicket .anim-text { color:#fff; }
 .anim-impact { background: rgba(245,166,35,0.92);  } .anim-impact .anim-text { color:#1a1a1a; }
-.anim-over   { background: rgba(0,0,0,0.88);       } .anim-over .anim-text   { color:var(--text); }
+.anim-over   { background: rgba(0,0,0,0.88);       } .anim-over .anim-text   { color:var(--accent); }
 
 /* ── Result Screen ─────────────────────────────── */
 .result-screen { flex:1; padding:24px 20px 48px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
@@ -754,7 +955,7 @@ input { font-family: var(--font-b); }
 .sc-innings    { background:var(--card-bg); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
 .sc-innings-header { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--surface); }
 .sc-innings-label  { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-dim); }
-.sc-team           { flex:1; font-size:17px; font-weight:700; color:var(--text); }
+.sc-team           { flex:1; font-size:17px; font-weight:700; color:var(--accent); }
 .sc-total          { font-family:var(--font-d); font-size:30px; color:var(--text); }
 .sc-over-row {
   display:flex; align-items:center; gap:10px;
@@ -770,7 +971,7 @@ input { font-family: var(--font-b); }
 .scb-six    { background:#ecc94b; color:#1a1a1a; }
 .scb-w      { background:var(--danger); color:#fff; }
 .scb-impact { background:var(--accent); color:var(--bg); font-size:9px; width:auto; padding:0 6px; border-radius:10px; }
-.sc-over-total { font-family:var(--font-d); font-size:22px; color:var(--text); min-width:28px; text-align:right; }
+.sc-over-total { font-family:var(--font-d); font-size:22px; color:var(--accent); min-width:28px; text-align:right; }
 .sc-target     { padding:10px 16px; font-size:12px; color:#999; font-style:italic; }
 .result-actions { display:flex; flex-direction:column; gap:12px; }
 
