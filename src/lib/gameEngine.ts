@@ -27,8 +27,8 @@ export function impactLabel(effect: ImpactCardEffect): string {
 
 export function impactShort(effect: ImpactCardEffect): string {
   switch (effect.type) {
-    case 'runs_add':    return `+${effect.value}`;
-    case 'runs_deduct': return `-${effect.value}`;
+    case 'runs_add':    return effect.value === 0 ? '0' : `+${effect.value}`;
+    case 'runs_deduct': return effect.value === 0 ? '0' : `-${effect.value}`;
     case 'over_double': return '×2';
     case 'wicket':      return 'W!';
   }
