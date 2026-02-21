@@ -599,7 +599,7 @@ input { font-family: var(--font-b); }
 .impact-btn:hover  { transform: translateY(-2px); }
 .impact-btn:active { transform: scale(0.93); }
 .impact-icon { font-size: clamp(20px, 4vw, 28px); line-height: 1; }
-.impact-text { font-size: clamp(10px, 2vw, 13px); font-weight: 700; text-align: center; padding: 0 4px; }
+.impact-text { font-size: clamp(12px, 2.5vw, 15px); font-weight: 700; text-align: center; padding: 0 4px; }
 .impact-runs_add    { border-color: #38a169; background: #f0fff4; color: #276749; }
 .impact-runs_deduct { border-color: var(--danger); background: #fff5f5; color: #c53030; }
 .impact-over_double { border-color: #d69e2e; background: #fffbeb; color: #b7791f; }
@@ -755,7 +755,7 @@ input { font-family: var(--font-b); }
 .sc-innings-header { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--surface); }
 .sc-innings-label  { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-dim); }
 .sc-team           { flex:1; font-size:17px; font-weight:700; color:var(--text); }
-.sc-total          { font-family:var(--font-d); font-size:30px; color:var(--text); }
+.sc-total          { font-family:var(--font-d); font-size:30px; color:#ffffff; }
 .sc-over-row {
   display:flex; align-items:center; gap:10px;
   padding:9px 16px; border-bottom:1px solid var(--card-border);
@@ -764,13 +764,13 @@ input { font-family: var(--font-b); }
 .sc-over-num   { font-size:12px; color:#999; min-width:34px; }
 .sc-over-balls { display:flex; gap:4px; flex:1; flex-wrap:wrap; }
 .sc-ball { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
-.scb-dot    { background:#e2e8f0; color:#555; }
+.scb-dot    { background:#94a3b8; color:#ffffff; }
 .scb-runs   { background:var(--surface); color:#fff; }
 .scb-four   { background:#3182ce; color:#fff; }
 .scb-six    { background:#ecc94b; color:#1a1a1a; }
 .scb-w      { background:var(--danger); color:#fff; }
-.scb-impact { background:var(--accent); color:var(--bg); font-size:9px; width:auto; padding:0 6px; border-radius:10px; }
-.sc-over-total { font-family:var(--font-d); font-size:22px; color:var(--text); min-width:28px; text-align:right; }
+.scb-impact { background:var(--accent); color:#ffffff; font-size:11px; font-weight:700; width:auto; padding:2px 8px; border-radius:10px; }
+.sc-over-total { font-family:var(--font-d); font-size:22px; color:#dc2626; min-width:28px; text-align:right; font-weight:700; }
 .sc-target     { padding:10px 16px; font-size:12px; color:#999; font-style:italic; }
 .result-actions { display:flex; flex-direction:column; gap:12px; }
 
@@ -1108,3 +1108,10 @@ input { font-family: var(--font-b); }
 .result-actions {
   animation: fade-in 0.6s ease-out 0.9s both;
 }
+
+/* Dark mode scorecard adjustments for better contrast */
+.dark .scb-dot { background: #475569; color: #e2e8f0; }
+.dark .scb-runs { background: var(--surface-hi); color: #fff; }
+.dark .sc-over-num { color: var(--text-dim); }
+.dark .sc-target { color: var(--text-dim); }
+.dark .sc-over-total { color: #fca5a5; }
