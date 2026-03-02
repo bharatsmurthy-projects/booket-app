@@ -770,7 +770,7 @@ input { font-family: var(--font-b); }
 .scb-six    { background:#ecc94b; color:#1a1a1a; }
 .scb-w      { background:var(--danger); color:#fff; }
 .scb-impact { background:var(--accent); color:#ffffff; font-size:11px; font-weight:700; width:auto; padding:2px 8px; border-radius:10px; }
-.sc-over-total { font-family:var(--font-d); font-size:22px; color:var(--text); min-width:28px; text-align:right; }
+.sc-over-total { font-family:var(--font-d); font-size:22px; color:#dc2626; min-width:28px; text-align:right; font-weight:700; }
 .sc-target     { padding:10px 16px; font-size:12px; color:#999; font-style:italic; }
 .result-actions { display:flex; flex-direction:column; gap:12px; }
 
@@ -1115,3 +1115,307 @@ input { font-family: var(--font-b); }
 .dark .sc-over-num { color: var(--text-dim); }
 .dark .sc-target { color: var(--text-dim); }
 .dark .sc-over-total { color: #fca5a5; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPACT CARD - CONSISTENT STYLING
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.impact-card-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.impact-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.impact-card-content {
+  position: relative;
+  background: var(--panel-bg);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.impact-card-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  text-align: center;
+  margin: 0 0 20px 0;
+  color: var(--text);
+}
+
+/* 3x3 Quick Grid */
+.impact-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.impact-quick-btn {
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.impact-quick-btn:active {
+  transform: scale(0.95);
+}
+
+.impact-btn-green {
+  background: #2D7A3E;
+}
+
+.impact-btn-green:hover {
+  background: #246630;
+}
+
+.impact-btn-red {
+  background: #C62828;
+}
+
+.impact-btn-red:hover {
+  background: #A82020;
+}
+
+.impact-btn-yellow {
+  background: #F57C00;
+  color: #FFFFFF;
+}
+
+.impact-btn-yellow:hover {
+  background: #E56B00;
+}
+
+.impact-btn-black {
+  background: #212121;
+}
+
+.impact-btn-black:hover {
+  background: #000000;
+}
+
+.impact-btn-blue {
+  background: #1565C0;
+  font-size: 18px;
+}
+
+.impact-btn-blue:hover {
+  background: #0D47A1;
+}
+
+/* Expandable Sections - CONSISTENT STYLE */
+.impact-expandable {
+  margin-bottom: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(30, 58, 95, 0.8);
+}
+
+.impact-expand-btn {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  background: rgba(30, 58, 95, 0.8);
+  border: none;
+  text-align: left;
+  padding: 0 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  transition: background 0.2s;
+}
+
+.impact-expand-btn:hover {
+  background: rgba(42, 74, 111, 0.9);
+}
+
+.impact-expand-btn span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.impact-expanded-content {
+  padding: 12px;
+  background: rgba(42, 74, 111, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Input - MATCHES EXPANDABLE STYLE */
+.impact-custom-container {
+  margin-bottom: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(30, 58, 95, 0.8);
+  padding: 12px;
+}
+
+.impact-custom {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.impact-custom-input {
+  flex: 1;
+  height: 50px;
+  font-size: 16px;
+  padding: 0 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(42, 74, 111, 0.6);
+  color: #FFFFFF;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.impact-custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+.impact-custom-input:focus {
+  outline: none;
+  border-color: #1565C0;
+  background: rgba(52, 90, 130, 0.8);
+}
+
+.impact-custom-apply {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  border: none;
+  border-radius: 8px;
+  background: #2D7A3E;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.impact-custom-apply:hover {
+  background: #246630;
+}
+
+.impact-custom-apply:active {
+  transform: scale(0.95);
+}
+
+/* Power Cards */
+.impact-power-card {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(30, 58, 95, 0.8);
+  text-align: left;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.impact-power-card:hover {
+  background: rgba(42, 74, 111, 0.9);
+}
+
+.impact-power-card:active {
+  transform: scale(0.98);
+}
+
+.impact-power-card:last-child {
+  margin-bottom: 0;
+}
+
+.power-card-icon {
+  font-size: 32px;
+}
+
+.power-card-text {
+  flex: 1;
+}
+
+.power-card-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #FFFFFF;
+}
+
+.power-card-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Active Effects Banner */
+.active-effects-banner {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, #D84315, #E64A19);
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.active-effects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.active-effect-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.effect-icon {
+  font-size: 20px;
+}
+
+.effect-text {
+  flex: 1;
+  text-align: left;
+}
+
+.effect-dots {
+  font-size: 16px;
+  letter-spacing: 2px;
+}

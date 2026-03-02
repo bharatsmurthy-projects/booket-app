@@ -380,18 +380,6 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
                 };
                 
                 // CREATE A BALL EVENT so needsImpact becomes false
-                // Get icon based on power card type
-                const getPowerCardIcon = (type: string): string => {
-                  switch (type) {
-                    case 'free_hit': return '⚡';
-                    case 'double_runs': return '🔥';
-                    case 'boundary_bonus': return '🎯';
-                    case 'boundary_freeze': return '❄️';
-                    case 'double_wicket': return '💥';
-                    default: return '⚡';
-                  }
-                };
-                
                 const impactBall: BallEvent = {
                   ball: over.balls.filter(b => !b.isImpactCard).length + 1,
                   runs: 0,
@@ -399,7 +387,7 @@ export default function ScoringScreen({ match, onMatchUpdate, onMatchEnd }: Prop
                   isImpactCard: true,
                   isLastBallTwist: false,
                   isReview: false,
-                  displayLabel: getPowerCardIcon(activeEffect.type),
+                  displayLabel: activeEffect.type === 'free_hit' ? '⚡' : '🔥',
                   runningTotal: currentInnings.totalRuns,
                 };
                 

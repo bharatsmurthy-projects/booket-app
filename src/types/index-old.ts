@@ -11,9 +11,9 @@ export interface ActiveEffect {
   id: string;
   type: 'double_runs' | 'free_hit' | 'boundary_bonus' | 'boundary_freeze' | 'double_wicket';
   ballsRemaining: number;
-  value?: number; // For boundary_bonus amount
-  penalty?: number; // For boundary_freeze penalty
-  description: string; // User-friendly text
+  value?: number;
+  penalty?: number;
+  description: string;
 }
 
 export interface BallEvent {
@@ -41,7 +41,7 @@ export interface OverSummary {
 
 export interface InningsData {
   teamName: string;
-  target?: number; // only for 2nd innings
+  target?: number;
   overs: OverSummary[];
   currentOver: OverSummary | null;
   totalRuns: number;
@@ -50,7 +50,7 @@ export interface InningsData {
   reviewsLeft: number;
   isComplete: boolean;
   wonBy?: string;
-  activeEffects: ActiveEffect[]; // NEW: Track active power cards
+  activeEffects: ActiveEffect[]; // NEW
 }
 
 export interface MatchConfig {

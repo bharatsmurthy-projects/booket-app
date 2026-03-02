@@ -30,7 +30,7 @@ export function impactShort(effect: ImpactCardEffect): string {
     case 'runs_add':    return effect.value === 0 ? '0' : `+${effect.value}`;
     case 'runs_deduct': return effect.value === 0 ? '0' : `-${effect.value}`;
     case 'over_double': return '×2';
-    case 'wicket':      return 'W!';
+    case 'wicket':      return 'W';
   }
 }
 
@@ -74,6 +74,7 @@ function createInnings(
     totalBalls: 0,
     reviewsLeft: config.totalReviews,
     isComplete: false,
+    activeEffects: [], // Initialize empty active effects array
   };
 }
 
@@ -125,21 +126,53 @@ export function applyCardDraw(
   const over    = innings.currentOver!;
 
   const isWicket = cardValue === 'W';
-  const runs     = isWicket ? 0 : (cardValue as number);
+  const runsScored = isWicket ? 0 : (cardValue as number);
   const realBalls = over.balls.filter(b => !b.isImpactCard).length;
+
+  // Process active effects BEFORE applying ball
+  const beforeEffects = processActiveEffectsBeforeBall(innings, runsScored, isWicket);
+  
+  // Check if free hit prevents this wicket
+  const actualIsWicket = beforeEffects.preventWicket ? false : isWicket;
+  
+  // Process active effects AFTER to modify runs
+  const finalRuns = processActiveEffectsAfterBall(innings, runsScored, actualIsWicket);
+  
+  // Check for double wicket effect
+  const isDoubleWicket = actualIsWicket && applyDoubleWicketEffect(innings);
+  const actualWickets = actualIsWicket ? (isDoubleWicket ? 2 : 1) : 0;
 
   const ball: BallEvent = {
     ball: realBalls + 1,
-    runs,
-    isWicket,
+    runs: finalRuns,
+    isWicket: actualIsWicket,
     isImpactCard: false,
     isLastBallTwist,
     isReview: false,
-    displayLabel: isWicket ? 'W' : String(runs),
-    runningTotal: innings.totalRuns + runs,
+    displayLabel: actualIsWicket ? 'W' : String(finalRuns),
+    runningTotal: innings.totalRuns + finalRuns,
   };
 
-  return updateInningsWithBall(state, ball);
+  // Decrement active effects after processing
+  decrementActiveEffects(innings);
+
+  // Update state with modified wicket count if double wicket
+  const result = updateInningsWithBall(state, ball);
+  
+  if (isDoubleWicket && !actualIsWicket) {
+    // If double wicket was active but no wicket occurred, still decrement effect
+    const inningsKey = state.currentInnings === 1 ? 'innings1' : 'innings2';
+    const currentInnings = getCurrentInnings(result);
+    return {
+      ...result,
+      [inningsKey]: {
+        ...currentInnings,
+        totalWickets: currentInnings.totalWickets + 1, // Add the second wicket
+      }
+    };
+  }
+  
+  return result;
 }
 
 // ─── Apply Impact Card ────────────────────────────────────────────────────────
@@ -443,3 +476,81 @@ export function getRunsNeeded(innings: InningsData): number {
 export function matchResultText(state: MatchState): string {
   return state.innings2?.wonBy ?? '';
 }
+
+// ─── Active Effects Management ────────────────────────────────────────────────
+
+export function processActiveEffectsBeforeBall(
+  innings: InningsData,
+  runsScored: number,
+  isWicket: boolean
+): { runs: number; preventWicket: boolean } {
+  let finalRuns = runsScored;
+  let preventWicket = false;
+
+  // Check for Free Hit - prevents wicket
+  const hasFreeHit = innings.activeEffects?.some(e => e.type === 'free_hit');
+  if (hasFreeHit && isWicket) {
+    preventWicket = true;
+  }
+
+  return { runs: finalRuns, preventWicket };
+}
+
+export function processActiveEffectsAfterBall(
+  innings: InningsData,
+  runsScored: number,
+  isWicket: boolean
+): number {
+  let finalRuns = runsScored;
+
+  if (!innings.activeEffects || innings.activeEffects.length === 0) {
+    return finalRuns;
+  }
+
+  // Apply run multipliers (Power Play, etc.)
+  const doubleEffect = innings.activeEffects.find(e => e.type === 'double_runs');
+  if (doubleEffect && !isWicket) {
+    finalRuns = runsScored * 2;
+  }
+
+  // Apply boundary bonus
+  const boundaryBonus = innings.activeEffects.find(e => e.type === 'boundary_bonus');
+  if (boundaryBonus && (runsScored === 4 || runsScored === 6)) {
+    finalRuns += boundaryBonus.value || 0;
+  }
+
+  // Apply boundary freeze penalty
+  const boundaryFreeze = innings.activeEffects.find(e => e.type === 'boundary_freeze');
+  if (boundaryFreeze && (runsScored === 4 || runsScored === 6)) {
+    finalRuns += boundaryFreeze.penalty || 0;
+  }
+
+  return finalRuns;
+}
+
+export function decrementActiveEffects(innings: InningsData): void {
+  if (!innings.activeEffects || innings.activeEffects.length === 0) {
+    return;
+  }
+
+  // Decrement ballsRemaining for all effects
+  innings.activeEffects = innings.activeEffects.map(effect => ({
+    ...effect,
+    ballsRemaining: effect.ballsRemaining - 1,
+    description: effect.description.replace(/\d+/, String(effect.ballsRemaining - 1)),
+  }));
+
+  // Remove expired effects
+  innings.activeEffects = innings.activeEffects.filter(e => e.ballsRemaining > 0);
+}
+
+export function applyDoubleWicketEffect(innings: InningsData): boolean {
+  const hasDoubleWicket = innings.activeEffects?.some(e => e.type === 'double_wicket');
+  if (hasDoubleWicket) {
+    // Remove the effect after use
+    innings.activeEffects = innings.activeEffects.filter(e => e.type !== 'double_wicket');
+    return true; // Indicates wicket should count as 2
+  }
+  return false;
+}
+
