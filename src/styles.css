@@ -1757,8 +1757,9 @@ input { font-family: var(--font-b); }
 }
 
 .scb-dot {
-  background: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.7);
+  background: #8B8B8B;
+  color: #FFFFFF;
+  border: 2px solid #6B6B6B;
 }
 
 .scb-runs {
@@ -1822,5 +1823,441 @@ input { font-family: var(--font-b); }
 
   .result-text {
     font-size: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SMOOTH SCREEN TRANSITIONS - ADD TO END OF styles.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Main content area transitions */
+.app-main {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.app-main.transitioning {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Individual screen enter animations */
+.app-main > * {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Specific screen transitions */
+.home-screen,
+.match-setup,
+.scoring-screen,
+.result-screen {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Smooth page load */
+.app {
+  animation: appFadeIn 0.5s ease-out;
+}
+
+@keyframes appFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPACT CARD MODAL ANIMATIONS
+   Replace the existing .impact-card-modal, .impact-card-overlay, and 
+   .impact-card-content CSS with these enhanced versions
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+   .impact-card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: modalFadeIn 0.3s ease-out;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .impact-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    animation: overlayFadeIn 0.3s ease-out;
+  }
+  
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .impact-card-content {
+    position: relative;
+    background: var(--panel-bg);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* Expandable sections animation */
+  .impact-expanded-content {
+    padding: 12px;
+    background: rgba(42, 74, 111, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: expandDown 0.3s ease-out;
+    transform-origin: top;
+  }
+  
+  @keyframes expandDown {
+    from {
+      opacity: 0;
+      transform: scaleY(0.8);
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+      max-height: 500px;
+    }
+  }
+  
+  /* Button hover effects */
+  .impact-quick-btn,
+  .impact-more-btn,
+  .impact-power-card,
+  .impact-custom-apply {
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  }
+  
+  .impact-quick-btn:hover,
+  .impact-more-btn:hover,
+  .impact-power-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .impact-quick-btn:active,
+  .impact-more-btn:active,
+  .impact-power-card:active,
+  .impact-custom-apply:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Expand button rotation */
+  .impact-expand-btn {
+    transition: background 0.2s ease-out;
+  }
+  
+  .impact-expand-btn span {
+    transition: transform 0.3s ease-out;
+    display: inline-block;
+  }
+  
+  /* Stagger animation for power cards */
+  .impact-power-card {
+    animation: fadeInStagger 0.3s ease-out backwards;
+  }
+  
+  .impact-power-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .impact-power-card:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  
+  .impact-power-card:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .impact-power-card:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  
+  @keyframes fadeInStagger {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Grid buttons stagger animation */
+  .impact-quick-btn {
+    animation: fadeInScale 0.3s ease-out backwards;
+  }
+  
+  .impact-quick-btn:nth-child(1) { animation-delay: 0.05s; }
+  .impact-quick-btn:nth-child(2) { animation-delay: 0.1s; }
+  .impact-quick-btn:nth-child(3) { animation-delay: 0.15s; }
+  .impact-quick-btn:nth-child(4) { animation-delay: 0.2s; }
+  .impact-quick-btn:nth-child(5) { animation-delay: 0.25s; }
+  .impact-quick-btn:nth-child(6) { animation-delay: 0.3s; }
+  .impact-quick-btn:nth-child(7) { animation-delay: 0.35s; }
+  .impact-quick-btn:nth-child(8) { animation-delay: 0.4s; }
+  .impact-quick-btn:nth-child(9) { animation-delay: 0.45s; }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   IMPACT CARD BUTTON COLORS - SUBTLE THEME PALETTE
+   Replace the existing .impact-btn-green and .impact-btn-red in styles.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ACCESSIBLE BUTTON COLORS - Subtle & Themed */
+.impact-btn-green {
+  background: #2E7D4E;
+  color: #FFFFFF;
+}
+
+.impact-btn-green:hover {
+  background: #266940;
+}
+
+.impact-btn-red {
+  background: #B83C3C;
+  color: #FFFFFF;
+}
+
+.impact-btn-red:hover {
+  background: #9E3333;
+}
+
+.impact-btn-yellow {
+  background: #F57C00;
+  color: #FFFFFF;
+}
+
+.impact-btn-yellow:hover {
+  background: #E56B00;
+}
+
+.impact-btn-black {
+  background: #212121;
+  color: #FFFFFF;
+}
+
+.impact-btn-black:hover {
+  background: #000000;
+}
+
+.impact-btn-blue {
+  background: #1565C0;
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+.impact-btn-blue:hover {
+  background: #0D47A1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIRMATION DIALOG - ADD TO END OF styles.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Overlay */
+.confirm-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: overlayFadeIn 0.2s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dialog Box */
+.confirm-dialog {
+  background: var(--panel-bg);
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  animation: dialogSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes dialogSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+.confirm-dialog-header {
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.confirm-dialog-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+}
+
+/* Body */
+.confirm-dialog-body {
+  padding: 20px 24px;
+}
+
+.confirm-dialog-message {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Actions */
+.confirm-dialog-actions {
+  padding: 16px 24px 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.confirm-dialog-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
+  min-width: 100px;
+}
+
+.confirm-dialog-btn:active {
+  transform: scale(0.98);
+}
+
+/* Cancel Button */
+.confirm-dialog-btn-cancel {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.confirm-dialog-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Confirm Button */
+.confirm-dialog-btn-confirm {
+  background: #E67E50;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-dialog-btn-confirm:hover {
+  background: #D96B3A;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Danger Variant (for destructive actions) */
+.confirm-dialog-btn-confirm.danger {
+  background: #dc2626;
+}
+
+.confirm-dialog-btn-confirm.danger:hover {
+  background: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .confirm-dialog {
+    margin: 0 16px;
+  }
+  
+  .confirm-dialog-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .confirm-dialog-btn {
+    width: 100%;
   }
 }
