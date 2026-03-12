@@ -7,8 +7,6 @@ import MatchSetup from './pages/MatchSetup';
 import ScoringScreen from './pages/ScoringScreen';
 import ResultScreen from './pages/ResultScreen';
 import ConfirmDialog from './components/ConfirmDialog';
-import ToastContainer from './components/ToastContainer';
-import { useToast } from './hooks/useToast';
 
 type AppView  = 'home' | 'setup' | 'scoring' | 'result';
 export type ThemeColor = 'booket' | 'green' | 'blue';
@@ -25,9 +23,6 @@ export default function App() {
   const [darkMode,  setDarkMode]  = useState(false);
   const [theme,     setTheme]     = useState<ThemeColor>('booket');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  // Toast notifications
-  const { toasts, dismissToast, success, error } = useToast();
   
   // Confirmation dialog state
   const [confirmDialog, setConfirmDialog] = useState<{
@@ -69,25 +64,18 @@ export default function App() {
     setMatch(newMatch);
     setCurrentMatchId(newMatch.id);
     saveMatch(newMatch);
-    success('Match started!');
     transitionToView('scoring');
   }
 
-  function handleMatchUpdate(updated: MatchState) { 
-    setMatch(updated);
-    saveMatch(updated);
-  }
+  function handleMatchUpdate(updated: MatchState) { setMatch(updated); }
   
   function handleMatchEnd(ended: MatchState) { 
-    setMatch(ended);
-    saveMatch(ended);
-    success('Match completed!');
+    setMatch(ended); 
     transitionToView('result');
   }
   
   function handleResumeMatch(m: MatchState) { 
-    setMatch(m);
-    success('Match resumed!');
+    setMatch(m); 
     transitionToView(m.phase === 'result' ? 'result' : 'scoring');
   }
   
@@ -105,7 +93,7 @@ export default function App() {
         },
       });
     } else {
-      setMatch(null);
+      setMatch(null); 
       transitionToView('setup');
     }
   }
@@ -122,14 +110,13 @@ export default function App() {
           // Save the match before leaving
           if (match) {
             saveMatch(match);
-            success('Match saved!');
           }
           setMatch(null);
           transitionToView('home');
         },
       });
     } else {
-      setMatch(null);
+      setMatch(null); 
       transitionToView('home');
     }
   }
@@ -167,9 +154,6 @@ export default function App() {
         {view === 'scoring' && match && <ScoringScreen match={match} onMatchUpdate={handleMatchUpdate} onMatchEnd={handleMatchEnd} />}
         {view === 'result'  && match && <ResultScreen  match={match} onNewMatch={handleNewMatch} onHome={handleHome} />}
       </main>
-
-      {/* Toast Notifications */}
-      <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
       {/* Confirmation Dialog */}
       <ConfirmDialog
