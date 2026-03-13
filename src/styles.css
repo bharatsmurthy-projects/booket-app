@@ -325,27 +325,121 @@ input { font-family: var(--font-b); }
 .stepper-btn:hover { background: var(--surface-hi); }
 .stepper-value { font-family: var(--font-d); font-size: 34px; color: var(--accent); min-width: 40px; text-align: center; line-height: 1; }
 
-.toss-section   { display: flex; flex-direction: column; gap: 14px; }
-.toss-label     { font-weight: 600; font-size: 16px; text-align: center; color: var(--card-text); opacity: 0.6; }
-.toss-team-btns, .toss-choice-btns { display: flex; gap: 10px; }
-.toss-team-btn, .toss-choice-btn {
-  flex: 1; padding: 16px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 17px; font-weight: 700;
-  background: var(--input-bg); color: var(--card-text);
-  border: 2px solid var(--card-border);
-  transition: var(--ease); text-align: center;
+.toss-section { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px;
 }
-.toss-team-btn.selected, .toss-choice-btn.selected {
-  background: var(--surface); color: var(--accent);
+
+.toss-label { 
+  font-weight: 600; 
+  font-size: 15px; 
+  text-align: center; 
+  color: var(--card-text); 
+  opacity: 0.7;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.toss-team-btns, .toss-choice-btns { 
+  display: flex; 
+  gap: 12px;
+  width: 100%;
+}
+
+.toss-team-btn {
+  flex: 1; 
+  padding: 18px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 17px; 
+  font-weight: 700;
+  background: var(--input-bg); 
+  color: var(--card-text);
+  border: 2px solid var(--card-border);
+  transition: var(--ease); 
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  min-width: 0;
+}
+
+.toss-team-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toss-team-btn.selected {
+  background: var(--surface); 
+  color: var(--accent);
   border-color: var(--accent);
 }
-.toss-choice-btn { font-size: 20px; }
-.toss-summary {
-  background: var(--surface); border-radius: var(--radius-sm);
-  padding: 14px; text-align: center; border: 2px solid var(--accent);
+
+.toss-choice-btn {
+  flex: 1; 
+  padding: 14px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 16px; 
+  font-weight: 700;
+  background: var(--input-bg); 
+  color: var(--card-text);
+  border: 2px solid var(--card-border);
+  transition: var(--ease); 
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  min-width: 0;
 }
-.toss-summary-text { color: var(--accent); font-weight: 700; font-size: 16px; }
+
+.toss-choice-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toss-choice-btn.selected {
+  background: var(--surface); 
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.toss-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.toss-summary {
+  background: var(--surface); 
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  text-align: center; 
+  border: 2px solid var(--accent);
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toss-summary strong {
+  font-weight: 700;
+}
+
+.toss-summary-text { 
+  color: var(--accent); 
+  font-weight: 700; 
+  font-size: 14px; 
+}
 
 /* ── Scoring Screen ────────────────────────────── */
 .scoring-screen {
@@ -1188,7 +1282,8 @@ input { font-family: var(--font-b); }
 }
 
 .impact-btn-green {
-  background: #2D7A3E;
+  background: #2E7D4E;
+  color: white;
 }
 
 .impact-btn-green:hover {
@@ -1196,1227 +1291,161 @@ input { font-family: var(--font-b); }
 }
 
 .impact-btn-red {
-  background: #C62828;
+  background: #B83C3C;
+  color: white;
 }
 
 .impact-btn-red:hover {
-  background: #A82020;
+  background: #A12E2E;
 }
 
 .impact-btn-yellow {
-  background: #F57C00;
-  color: #FFFFFF;
-}
-
-.impact-btn-yellow:hover {
-  background: #E56B00;
-}
-
-.impact-btn-black {
-  background: #212121;
-}
-
-.impact-btn-black:hover {
-  background: #000000;
-}
-
-.impact-btn-blue {
-  background: #1565C0;
-  font-size: 18px;
-}
-
-.impact-btn-blue:hover {
-  background: #0D47A1;
-}
-
-/* Expandable Sections - CONSISTENT STYLE */
-.impact-expandable {
-  margin-bottom: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  overflow: hidden;
-  background: rgba(30, 58, 95, 0.8);
-}
-
-.impact-expand-btn {
-  width: 100%;
-  height: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  background: rgba(30, 58, 95, 0.8);
-  border: none;
-  text-align: left;
-  padding: 0 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: #FFFFFF;
-  transition: background 0.2s;
-}
-
-.impact-expand-btn:hover {
-  background: rgba(42, 74, 111, 0.9);
-}
-
-.impact-expand-btn span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.impact-expanded-content {
-  padding: 12px;
-  background: rgba(42, 74, 111, 0.6);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Custom Input - MATCHES EXPANDABLE STYLE */
-.impact-custom-container {
-  margin-bottom: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(30, 58, 95, 0.8);
-  padding: 12px;
-}
-
-.impact-custom {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.impact-custom-input {
-  flex: 1;
-  height: 50px;
-  font-size: 16px;
-  padding: 0 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(42, 74, 111, 0.6);
-  color: #FFFFFF;
-  transition: border-color 0.2s, background 0.2s;
-}
-
-.impact-custom-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-}
-
-.impact-custom-input:focus {
-  outline: none;
-  border-color: #1565C0;
-  background: rgba(52, 90, 130, 0.8);
-}
-
-.impact-custom-apply {
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  border: none;
-  border-radius: 8px;
-  background: #2D7A3E;
-  color: white;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.impact-custom-apply:hover {
-  background: #246630;
-}
-
-.impact-custom-apply:active {
-  transform: scale(0.95);
-}
-
-/* Power Cards */
-.impact-power-card {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(30, 58, 95, 0.8);
-  text-align: left;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.impact-power-card:hover {
-  background: rgba(42, 74, 111, 0.9);
-}
-
-.impact-power-card:active {
-  transform: scale(0.98);
-}
-
-.impact-power-card:last-child {
-  margin-bottom: 0;
-}
-
-.power-card-icon {
-  font-size: 32px;
-}
-
-.power-card-text {
-  flex: 1;
-}
-
-.power-card-name {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #FFFFFF;
-}
-
-.power-card-desc {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Active Effects Banner */
-.active-effects-banner {
-  margin-bottom: 16px;
-  padding: 12px;
-  background: linear-gradient(135deg, #D84315, #E64A19);
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-.active-effects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.active-effect-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-}
-
-.effect-icon {
-  font-size: 20px;
-}
-
-.effect-text {
-  flex: 1;
-  text-align: left;
-}
-
-.effect-dots {
-  font-size: 16px;
-  letter-spacing: 2px;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   ENHANCED RESULT SCREEN - ADD TO END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Result Screen Layout */
-.result-screen {
-  position: relative;
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Winner Banner */
-.result-banner {
-  text-align: center;
-  padding: 30px 20px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  position: relative;
-  z-index: 1;
-}
-
-.result-trophy {
-  font-size: 64px;
-  margin-bottom: 16px;
-  animation: trophy-bounce 0.6s ease-out;
-}
-
-@keyframes trophy-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-.result-text {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Match Summary Cards */
-.result-summary-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 0;
-}
-
-.summary-card {
-  background: rgba(30, 58, 95, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-}
-
-.summary-card-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-.summary-card-team {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin-bottom: 8px;
-}
-
-.summary-card-score {
-  font-size: 32px;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin-bottom: 4px;
-}
-
-.summary-card-overs {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Match Highlights */
-.result-highlights {
-  background: rgba(30, 58, 95, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.highlights-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin: 0 0 16px 0;
-  text-align: center;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.highlight-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.highlight-icon {
-  font-size: 24px;
-}
-
-.highlight-value {
-  font-size: 24px;
-  font-weight: bold;
-  color: #FFFFFF;
-}
-
-.highlight-label {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-}
-
-/* Stats Toggle Button */
-.stats-toggle-btn {
-  width: 100%;
-  padding: 12px;
-  background: rgba(30, 58, 95, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.stats-toggle-btn:hover {
-  background: rgba(42, 74, 111, 0.9);
-}
-
-/* Action Buttons */
-.result-actions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.result-actions-secondary {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.btn-share,
-.btn-copy {
-  padding: 14px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.1s, background 0.2s;
-}
-
-.btn-share {
-  background: #22c55e;
-  color: white;
-}
-
-.btn-share:hover {
-  background: #16a34a;
-}
-
-.btn-copy {
-  background: #F5EFE7;
-  color: #1e3a5f;
-  border: 2px solid rgba(30, 58, 95, 0.3);
+  background: #F5C542;
+  color: #1a1a1a;
   font-weight: 700;
 }
 
-.btn-copy:hover {
-  background: #E8E0D5;
-  border-color: rgba(30, 58, 95, 0.5);
-}
-
-.btn-share:active,
-.btn-copy:active {
-  transform: scale(0.98);
-}
-
-/* Confetti */
-.confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-.confetti-piece {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: -20px;
-  opacity: 0;
-  animation: confetti-fall linear forwards;
-}
-
-@keyframes confetti-fall {
-  0% {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(100vh) rotate(360deg);
-  }
-}
-
-/* Scorecard (Collapsible) */
-.scorecard {
-  background: rgba(30, 58, 95, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 16px;
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.sc-innings {
-  margin-bottom: 20px;
-}
-
-.sc-innings:last-child {
-  margin-bottom: 0;
-}
-
-.sc-innings-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: rgba(42, 74, 111, 0.6);
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-
-.sc-innings-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-}
-
-.sc-team {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF;
-  flex: 1;
-}
-
-.sc-total {
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFFFFF;
-}
-
-.sc-over-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sc-over-row:last-child {
-  border-bottom: none;
-}
-
-.sc-over-num {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1e3a5f;
-  min-width: 50px;
-}
-
-.sc-over-balls {
-  display: flex;
-  gap: 6px;
-  flex: 1;
-  flex-wrap: wrap;
-}
-
-.sc-ball {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  font-size: 13px;
-  font-weight: bold;
-  padding: 0 4px;
-}
-
-.scb-dot {
-  background: #8B8B8B;
-  color: #FFFFFF;
-  border: 2px solid #6B6B6B;
-}
-
-.scb-runs {
-  background: #3b82f6;
-  color: white;
-}
-
-.scb-four {
-  background: #22c55e;
-  color: white;
-}
-
-.scb-six {
-  background: #3b82f6;
-  color: white;
-}
-
-.scb-w {
-  background: #ef4444;
-  color: white;
-}
-
-.scb-impact {
-  background: #f59e0b;
-  color: white;
-  font-size: 11px;
-}
-
-.sc-over-total {
-  font-size: 16px;
-  font-weight: bold;
-  color: #1e3a5f;
-  min-width: 40px;
-  text-align: right;
-}
-
-.sc-target {
-  margin-top: 12px;
-  padding: 8px 12px;
-  background: rgba(42, 74, 111, 0.6);
-  border-radius: 6px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .result-summary-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .summary-card-score {
-    font-size: 28px;
-  }
-
-  .result-text {
-    font-size: 24px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   SMOOTH SCREEN TRANSITIONS - ADD TO END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Main content area transitions */
-.app-main {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-
-.app-main.transitioning {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-/* Individual screen enter animations */
-.app-main > * {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Specific screen transitions */
-.home-screen,
-.match-setup,
-.scoring-screen,
-.result-screen {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-/* Smooth page load */
-.app {
-  animation: appFadeIn 0.5s ease-out;
-}
-
-@keyframes appFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   IMPACT CARD MODAL ANIMATIONS
-   Replace the existing .impact-card-modal, .impact-card-overlay, and 
-   .impact-card-content CSS with these enhanced versions
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-   .impact-card-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    animation: modalFadeIn 0.3s ease-out;
-  }
-  
-  @keyframes modalFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .impact-card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    animation: overlayFadeIn 0.3s ease-out;
-  }
-  
-  @keyframes overlayFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .impact-card-content {
-    position: relative;
-    background: var(--panel-bg);
-    border-radius: 16px;
-    padding: 20px;
-    max-width: 400px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  
-  @keyframes modalSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  
-  /* Expandable sections animation */
-  .impact-expanded-content {
-    padding: 12px;
-    background: rgba(42, 74, 111, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    animation: expandDown 0.3s ease-out;
-    transform-origin: top;
-  }
-  
-  @keyframes expandDown {
-    from {
-      opacity: 0;
-      transform: scaleY(0.8);
-      max-height: 0;
-    }
-    to {
-      opacity: 1;
-      transform: scaleY(1);
-      max-height: 500px;
-    }
-  }
-  
-  /* Button hover effects */
-  .impact-quick-btn,
-  .impact-more-btn,
-  .impact-power-card,
-  .impact-custom-apply {
-    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-  }
-  
-  .impact-quick-btn:hover,
-  .impact-more-btn:hover,
-  .impact-power-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  .impact-quick-btn:active,
-  .impact-more-btn:active,
-  .impact-power-card:active,
-  .impact-custom-apply:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Expand button rotation */
-  .impact-expand-btn {
-    transition: background 0.2s ease-out;
-  }
-  
-  .impact-expand-btn span {
-    transition: transform 0.3s ease-out;
-    display: inline-block;
-  }
-  
-  /* Stagger animation for power cards */
-  .impact-power-card {
-    animation: fadeInStagger 0.3s ease-out backwards;
-  }
-  
-  .impact-power-card:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  
-  .impact-power-card:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-  
-  .impact-power-card:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-  
-  .impact-power-card:nth-child(4) {
-    animation-delay: 0.25s;
-  }
-  
-  @keyframes fadeInStagger {
-    from {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  /* Grid buttons stagger animation */
-  .impact-quick-btn {
-    animation: fadeInScale 0.3s ease-out backwards;
-  }
-  
-  .impact-quick-btn:nth-child(1) { animation-delay: 0.05s; }
-  .impact-quick-btn:nth-child(2) { animation-delay: 0.1s; }
-  .impact-quick-btn:nth-child(3) { animation-delay: 0.15s; }
-  .impact-quick-btn:nth-child(4) { animation-delay: 0.2s; }
-  .impact-quick-btn:nth-child(5) { animation-delay: 0.25s; }
-  .impact-quick-btn:nth-child(6) { animation-delay: 0.3s; }
-  .impact-quick-btn:nth-child(7) { animation-delay: 0.35s; }
-  .impact-quick-btn:nth-child(8) { animation-delay: 0.4s; }
-  .impact-quick-btn:nth-child(9) { animation-delay: 0.45s; }
-  
-  @keyframes fadeInScale {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════════════
-   IMPACT CARD BUTTON COLORS - SUBTLE THEME PALETTE
-   Replace the existing .impact-btn-green and .impact-btn-red in styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ACCESSIBLE BUTTON COLORS - Subtle & Themed */
-.impact-btn-green {
-  background: #2E7D4E;
-  color: #FFFFFF;
-}
-
-.impact-btn-green:hover {
-  background: #266940;
-}
-
-.impact-btn-red {
-  background: #B83C3C;
-  color: #FFFFFF;
-}
-
-.impact-btn-red:hover {
-  background: #9E3333;
-}
-
-.impact-btn-yellow {
-  background: #F57C00;
-  color: #FFFFFF;
-}
-
 .impact-btn-yellow:hover {
-  background: #E56B00;
+  background: #E6B632;
 }
 
 .impact-btn-black {
-  background: #212121;
-  color: #FFFFFF;
+  background: #2a2a2a;
+  color: white;
+  font-weight: 700;
 }
 
 .impact-btn-black:hover {
-  background: #000000;
+  background: #1a1a1a;
 }
 
 .impact-btn-blue {
-  background: #1565C0;
-  font-size: 18px;
-  color: #FFFFFF;
+  background: #1E7AD3;
+  color: white;
 }
 
 .impact-btn-blue:hover {
-  background: #0D47A1;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   CONFIRMATION DIALOG - ADD TO END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Overlay */
-.confirm-dialog-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  padding: 20px;
-  animation: overlayFadeIn 0.2s ease-out;
-}
-
-@keyframes overlayFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Dialog Box */
-.confirm-dialog {
-  background: var(--panel-bg);
-  border-radius: 16px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  animation: dialogSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes dialogSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Header */
-.confirm-dialog-header {
-  padding: 24px 24px 16px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.confirm-dialog-title {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFFFFF;
-  font-family: var(--font-display);
-}
-
-/* Body */
-.confirm-dialog-body {
-  padding: 20px 24px;
-}
-
-.confirm-dialog-message {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Actions */
-.confirm-dialog-actions {
-  padding: 16px 24px 24px 24px;
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-}
-
-.confirm-dialog-btn {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
-  min-width: 100px;
-}
-
-.confirm-dialog-btn:active {
-  transform: scale(0.98);
-}
-
-/* Cancel Button */
-.confirm-dialog-btn-cancel {
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.confirm-dialog-btn-cancel:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Confirm Button */
-.confirm-dialog-btn-confirm {
-  background: #E67E50;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.confirm-dialog-btn-confirm:hover {
-  background: #D96B3A;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Danger Variant (for destructive actions) */
-.confirm-dialog-btn-confirm.danger {
-  background: #dc2626;
-}
-
-.confirm-dialog-btn-confirm.danger:hover {
-  background: #b91c1c;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .confirm-dialog {
-    margin: 0 16px;
-  }
-  
-  .confirm-dialog-actions {
-    flex-direction: column-reverse;
-  }
-  
-  .confirm-dialog-btn {
-    width: 100%;
-  }
-}
-/* ═══════════════════════════════════════════════════════════════════════════
-   TOAST NOTIFICATIONS - ADD TO END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Toast Container - Positioned within app */
-.app {
-  position: relative;
-}
-
-.toast-container {
-  position: absolute;
-  top: 90px;
-  right: 20px;
-  z-index: 3000;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  pointer-events: none;
-  max-width: 380px;
-}
-
-/* Individual Toast */
-.toast {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 300px;
-  max-width: 400px;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  pointer-events: auto;
-  animation: toastSlideIn 0.3s ease-out;
-  border: 2px solid;
-}
-
-@keyframes toastSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Toast Icon */
-.toast-icon {
-  font-size: 20px;
-  font-weight: bold;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* Toast Message */
-.toast-message {
-  flex: 1;
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-/* Toast Close Button */
-.toast-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  flex-shrink: 0;
-  transition: background 0.2s;
-}
-
-/* Success Toast */
-.toast-success {
-  background: #2D7A3E;
-  border-color: #3D9A4E;
-  color: white;
-}
-
-.toast-success .toast-icon {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.toast-success .toast-close {
-  color: white;
-}
-
-.toast-success .toast-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Error Toast */
-.toast-error {
-  background: #B83C3C;
-  border-color: #D84A4A;
-  color: white;
-}
-
-.toast-error .toast-icon {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.toast-error .toast-close {
-  color: white;
-}
-
-.toast-error .toast-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Info Toast */
-.toast-info {
   background: #1565C0;
-  border-color: #1E7AD3;
-  color: white;
 }
 
-.toast-info .toast-icon {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+/* Additional toss button enhancements */
+.toss-team-btn {
+  cursor: pointer;
+}
+.toss-team-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.toast-info .toast-close {
-  color: white;
+/* Toss choice section spacing */
+.toss-choice {
+  margin-top: 16px;
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPACT CARD BUTTON COLORS - ADD TO END OF styles.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Green buttons (+2, +4, +6) */
+.impact-btn-green {
+  background: #2E7D4E !important;
+  color: white !important;
 }
 
-.toast-info .toast-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+.impact-btn-green:hover {
+  background: #246630 !important;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .toast-container {
-    top: 70px;
-    right: 10px;
-    left: 10px;
-  }
+/* Red buttons (-2, -3, -5) */
+.impact-btn-red {
+  background: #B83C3C !important;
+  color: white !important;
+}
 
-  .toast {
-    min-width: auto;
-    max-width: none;
-  }
+.impact-btn-red:hover {
+  background: #A12E2E !important;
+}
+
+/* Yellow button (×2) */
+.impact-btn-yellow {
+  background: #F5C542 !important;
+  color: #1a1a1a !important;
+  font-weight: 700 !important;
+}
+
+.impact-btn-yellow:hover {
+  background: #E6B632 !important;
+}
+
+/* Black button (OUT) */
+.impact-btn-black {
+  background: #2a2a2a !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.impact-btn-black:hover {
+  background: #1a1a1a !important;
+}
+
+/* Blue button (FREE HIT) */
+.impact-btn-blue {
+  background: #1E7AD3 !important;
+  color: white !important;
+}
+
+.impact-btn-blue:hover {
+  background: #1565C0 !important;
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPACT BUTTON COLOR FIX - HIGHER SPECIFICITY
+   ADD TO THE VERY END OF styles.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Use double class selector for higher specificity */
+.impact-quick-btn.impact-btn-yellow {
+  background: #F5C542 !important;
+  color: #1a1a1a !important;
+  font-weight: 700 !important;
+}
+
+.impact-quick-btn.impact-btn-yellow:hover {
+  background: #E6B632 !important;
+}
+
+.impact-quick-btn.impact-btn-black {
+  background: #2a2a2a !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.impact-quick-btn.impact-btn-black:hover {
+  background: #1a1a1a !important;
+}
+
+.impact-quick-btn.impact-btn-blue {
+  background: #1E7AD3 !important;
+  color: white !important;
+}
+
+.impact-quick-btn.impact-btn-blue:hover {
+  background: #1565C0 !important;
+}
+
+/* Also fix green and red for consistency */
+.impact-quick-btn.impact-btn-green {
+  background: #2E7D4E !important;
+  color: white !important;
+}
+
+.impact-quick-btn.impact-btn-green:hover {
+  background: #246630 !important;
+}
+
+.impact-quick-btn.impact-btn-red {
+  background: #B83C3C !important;
+  color: white !important;
+}
+
+.impact-quick-btn.impact-btn-red:hover {
+  background: #A12E2E !important;
 }
