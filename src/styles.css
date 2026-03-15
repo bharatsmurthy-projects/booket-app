@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════
+   BOOKET STYLES v4 - CACHE BUST 2026-03-15-v4
+   Force browser reload: Ctrl+Shift+R or Cmd+Shift+R
+   ═══════════════════════════════════════════════════ */
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 /* ═══════════════════════════════════════════════════
@@ -1598,15 +1603,23 @@ input { font-family: var(--font-b); }
   border-color: var(--accent);
 }
 
-.result-actions {
-  display: flex;
+/* Result screen 2x2 button grid */
+.result-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-top: 20px;
 }
 
-.result-actions-secondary {
-  display: flex;
-  gap: 12px;
+.result-actions-grid .btn-share,
+.result-actions-grid .btn-copy,
+.result-actions-grid .btn-primary,
+.result-actions-grid .btn-secondary {
+  margin: 0;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius);
 }
 
 /* Confetti animation */
@@ -1673,33 +1686,55 @@ input { font-family: var(--font-b); }
 }
 
 /* Better result screen button styling */
-.btn-share,
+.btn-share {
+  background: var(--surface-mid) !important;
+  border: 2px solid var(--surface-hi) !important;
+  color: var(--text) !important;
+}
+
+.btn-share:hover {
+  background: var(--surface-hi) !important;
+  border-color: var(--accent) !important;
+}
+
 .btn-copy {
-  background: var(--surface-mid);
-  border-color: var(--accent);
+  background: var(--accent) !important;
+  border: 2px solid var(--accent-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 0 var(--accent-dark) !important;
 }
 
-.btn-share:hover,
 .btn-copy:hover {
-  background: var(--accent);
-  color: #ffffff;
-  border-color: var(--accent);
+  filter: brightness(1.1);
 }
 
-.dark .btn-share,
+.btn-copy:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--accent-dark) !important;
+}
+
+.dark .btn-share {
+  background: var(--surface-mid) !important;
+  border-color: var(--surface-hi) !important;
+}
+
 .dark .btn-copy {
-  background: var(--surface-mid);
-  border-color: var(--accent);
-}
-
-.dark .btn-share:hover,
-.dark .btn-copy:hover {
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--accent) !important;
+  border-color: var(--accent-dark) !important;
 }
 
 /* Ensure result screen trophy banner shows up */
 .result-banner {
   background: linear-gradient(135deg, var(--surface), var(--surface-mid)) !important;
   border: 2px solid var(--accent) !important;
+}
+
+/* Ensure result screen wrapper has proper background */
+.dark .result-summary-cards .summary-card {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+.dark .result-highlights {
+  background: var(--surface) !important;
 }

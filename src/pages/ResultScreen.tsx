@@ -127,17 +127,14 @@ export default function ResultScreen({ match, onNewMatch, onHome }: Props) {
         </div>
       )}
 
-      {/* Action buttons */}
-      <div className="result-actions">
+      {/* Action buttons - 2x2 Grid */}
+      <div className="result-actions-grid">
         <button className="btn-share" onClick={handleShareMatch}>
           📤 Share
         </button>
         <button className="btn-copy" onClick={handleCopyMatchSummary}>
           {copied ? '✓ Copied!' : '📋 Copy'}
         </button>
-      </div>
-
-      <div className="result-actions-secondary">
         <button className="btn-primary" onClick={onNewMatch}>
           🏏 New Match
         </button>
