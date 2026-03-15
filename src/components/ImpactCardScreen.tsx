@@ -133,15 +133,26 @@ export default function ImpactCardScreen({ innings, onApply }: Props) {
 
         {/* 3x3 Grid - Always Visible */}
         <div className="impact-quick-grid">
-          {quickActions.map((action, i) => (
-            <button
-              key={i}
-              className={`impact-quick-btn impact-btn-${action.color}`}
-              onClick={() => applyQuickAction(action)}
-            >
-              {action.label}
-            </button>
-          ))}
+          {quickActions.map((action, i) => {
+            const colorStyles = {
+              green: { background: '#2E7D4E', color: 'white' },
+              red: { background: '#B83C3C', color: 'white' },
+              yellow: { background: '#F5C542', color: '#1a1a1a', fontWeight: 700 },
+              black: { background: '#2a2a2a', color: 'white', fontWeight: 700 },
+              blue: { background: '#1E7AD3', color: 'white' },
+            };
+
+            return (
+              <button
+                key={i}
+                className={`impact-quick-btn impact-btn-${action.color}`}
+                style={colorStyles[action.color]}
+                onClick={() => applyQuickAction(action)}
+              >
+                {action.label}
+              </button>
+            );
+          })}
         </div>
 
         {/* Custom Input - Matches expandable style */}
