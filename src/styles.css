@@ -841,14 +841,36 @@ input { font-family: var(--font-b); }
 .anim-over   { background: rgba(0,0,0,0.88);       } .anim-over .anim-text   { color:var(--text); }
 
 /* ── Result Screen ─────────────────────────────── */
-.result-screen { flex:1; padding:24px 20px 48px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
+.result-screen { 
+  flex: 1; 
+  padding: 20px 16px 32px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  overflow-y: auto; 
+}
+
 .result-banner {
   background: linear-gradient(135deg, var(--surface), var(--surface-mid));
-  border: 2px solid var(--accent); border-radius: var(--radius);
-  padding: 36px 24px; text-align: center;
+  border: 2px solid var(--accent); 
+  border-radius: var(--radius);
+  padding: 28px 20px; 
+  text-align: center;
 }
-.result-trophy { font-size:64px; line-height:1; margin-bottom:12px; }
-.result-text   { font-family:var(--font-d); font-size:36px; letter-spacing:2px; color:var(--text); line-height:1.2; }
+
+.result-trophy { 
+  font-size: 56px; 
+  line-height: 1; 
+  margin-bottom: 10px; 
+}
+
+.result-text { 
+  font-family: var(--font-d); 
+  font-size: 28px; 
+  letter-spacing: 2px; 
+  color: var(--text); 
+  line-height: 1.2; 
+}
 .scorecard     { display:flex; flex-direction:column; gap:14px; }
 .sc-innings    { background:var(--card-bg); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
 .sc-innings-header { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--surface); }
@@ -1277,8 +1299,6 @@ input { font-family: var(--font-b); }
   font-weight: bold;
   border: none;
   border-radius: 8px;
-  background: var(--surface-mid);
-  color: white;
   cursor: pointer;
   transition: transform 0.1s;
 }
@@ -1463,34 +1483,34 @@ input { font-family: var(--font-b); }
 
 .result-summary-cards {
   display: flex;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
 .summary-card {
   flex: 1;
   background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 16px;
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
   box-shadow: var(--shadow);
-  border-left: 4px solid var(--accent);
+  border-left: 3px solid var(--accent);
   text-align: center;
 }
 
 .summary-card-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--text-dim);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .summary-card-team {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--card-text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1498,10 +1518,10 @@ input { font-family: var(--font-b); }
 
 .summary-card-score {
   font-family: var(--font-d);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--surface);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .dark .summary-card-score {
@@ -1509,48 +1529,48 @@ input { font-family: var(--font-b); }
 }
 
 .summary-card-overs {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-dim);
 }
 
 .result-highlights {
   background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 20px;
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
   box-shadow: var(--shadow);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .highlights-title {
   font-family: var(--font-d);
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 1.5px;
   color: var(--card-text);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px 16px;
 }
 
 .highlight-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .highlight-icon {
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1;
 }
 
 .highlight-value {
   font-family: var(--font-d);
-  font-size: 28px;
+  font-size: 26px;
   color: var(--surface);
   line-height: 1;
 }
@@ -1560,28 +1580,29 @@ input { font-family: var(--font-b); }
 }
 
 .highlight-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 
 .stats-toggle-btn {
   width: 100%;
-  padding: 14px 20px;
+  padding: 12px 16px;
   background: var(--surface);
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   border: 2px solid var(--surface-hi);
-  border-radius: var(--radius);
-  margin-bottom: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
   transition: var(--ease);
 }
 
 .stats-toggle-btn:hover {
   background: var(--surface-mid);
+  border-color: var(--accent);
 }
 
 .btn-share,
