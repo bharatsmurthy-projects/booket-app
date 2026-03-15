@@ -1272,6 +1272,7 @@ input { font-family: var(--font-b); }
   font-weight: bold;
   border: none;
   border-radius: 8px;
+  background: var(--surface-mid);
   color: white;
   cursor: pointer;
   transition: transform 0.1s;
@@ -1281,127 +1282,12 @@ input { font-family: var(--font-b); }
   transform: scale(0.95);
 }
 
-.impact-btn-green {
-  background: #2E7D4E;
-  color: white;
-}
 
-.impact-btn-green:hover {
-  background: #246630;
-}
-
-.impact-btn-red {
-  background: #B83C3C;
-  color: white;
-}
-
-.impact-btn-red:hover {
-  background: #A12E2E;
-}
-
-.impact-btn-yellow {
-  background: #F5C542;
-  color: #1a1a1a;
-  font-weight: 700;
-}
-
-.impact-btn-yellow:hover {
-  background: #E6B632;
-}
-
-.impact-btn-black {
-  background: #2a2a2a;
-  color: white;
-  font-weight: 700;
-}
-
-.impact-btn-black:hover {
-  background: #1a1a1a;
-}
-
-.impact-btn-blue {
-  background: #1E7AD3;
-  color: white;
-}
-
-.impact-btn-blue:hover {
-  background: #1565C0;
-}
-
-/* Additional toss button enhancements */
-.toss-team-btn {
-  cursor: pointer;
-}
-.toss-team-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Toss choice section spacing */
-.toss-choice {
-  margin-top: 16px;
-}
-/* ═══════════════════════════════════════════════════════════════════════════
-   IMPACT CARD BUTTON COLORS - ADD TO END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Green buttons (+2, +4, +6) */
-.impact-btn-green {
-  background: #2E7D4E !important;
-  color: white !important;
-}
-
-.impact-btn-green:hover {
-  background: #246630 !important;
-}
-
-/* Red buttons (-2, -3, -5) */
-.impact-btn-red {
-  background: #B83C3C !important;
-  color: white !important;
-}
-
-.impact-btn-red:hover {
-  background: #A12E2E !important;
-}
+/* ═══════════════════════════════════════════════════
+   IMPACT BUTTON COLORS - Fixed (no duplicates)
+   ═══════════════════════════════════════════════════ */
 
 /* Yellow button (×2) */
-.impact-btn-yellow {
-  background: #F5C542 !important;
-  color: #1a1a1a !important;
-  font-weight: 700 !important;
-}
-
-.impact-btn-yellow:hover {
-  background: #E6B632 !important;
-}
-
-/* Black button (OUT) */
-.impact-btn-black {
-  background: #2a2a2a !important;
-  color: white !important;
-  font-weight: 700 !important;
-}
-
-.impact-btn-black:hover {
-  background: #1a1a1a !important;
-}
-
-/* Blue button (FREE HIT) */
-.impact-btn-blue {
-  background: #1E7AD3 !important;
-  color: white !important;
-}
-
-.impact-btn-blue:hover {
-  background: #1565C0 !important;
-}
-/* ═══════════════════════════════════════════════════════════════════════════
-   IMPACT BUTTON COLOR FIX - HIGHER SPECIFICITY
-   ADD TO THE VERY END OF styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Use double class selector for higher specificity */
 .impact-quick-btn.impact-btn-yellow {
   background: #F5C542 !important;
   color: #1a1a1a !important;
@@ -1412,6 +1298,7 @@ input { font-family: var(--font-b); }
   background: #E6B632 !important;
 }
 
+/* Black button (OUT) */
 .impact-quick-btn.impact-btn-black {
   background: #2a2a2a !important;
   color: white !important;
@@ -1422,6 +1309,7 @@ input { font-family: var(--font-b); }
   background: #1a1a1a !important;
 }
 
+/* Blue button (FREE HIT) */
 .impact-quick-btn.impact-btn-blue {
   background: #1E7AD3 !important;
   color: white !important;
@@ -1431,7 +1319,7 @@ input { font-family: var(--font-b); }
   background: #1565C0 !important;
 }
 
-/* Also fix green and red for consistency */
+/* Green buttons (+2, +4, +6) */
 .impact-quick-btn.impact-btn-green {
   background: #2E7D4E !important;
   color: white !important;
@@ -1441,6 +1329,7 @@ input { font-family: var(--font-b); }
   background: #246630 !important;
 }
 
+/* Red buttons (-2, -3, -5) */
 .impact-quick-btn.impact-btn-red {
   background: #B83C3C !important;
   color: white !important;
@@ -1448,4 +1337,369 @@ input { font-family: var(--font-b); }
 
 .impact-quick-btn.impact-btn-red:hover {
   background: #A12E2E !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   TOAST NOTIFICATIONS
+   ═══════════════════════════════════════════════════ */
+
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 400px;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  animation: toast-slide-in 0.3s ease-out;
+  border-left: 4px solid var(--accent);
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-success {
+  border-left-color: #22c55e;
+}
+
+.toast-error {
+  border-left-color: #ef4444;
+}
+
+.toast-info {
+  border-left-color: #3b82f6;
+}
+
+.toast-icon {
+  font-size: 20px;
+  font-weight: bold;
+  min-width: 24px;
+  text-align: center;
+}
+
+.toast-success .toast-icon {
+  color: #22c55e;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+.toast-info .toast-icon {
+  color: #3b82f6;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--card-text);
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+.toast-close:active {
+  transform: none;
+}
+
+/* Dark mode toast adjustments */
+.dark .toast {
+  background: var(--surface-mid);
+  color: var(--text);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dark .toast-close {
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESULT SCREEN - MATCH SUMMARY & HIGHLIGHTS
+   ═══════════════════════════════════════════════════ */
+
+.result-summary-cards {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.summary-card {
+  flex: 1;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+  text-align: center;
+}
+
+.summary-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.summary-card-team {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--card-text);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary-card-score {
+  font-family: var(--font-d);
+  font-size: 32px;
+  color: var(--surface);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.dark .summary-card-score {
+  color: var(--accent);
+}
+
+.summary-card-overs {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.result-highlights {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+
+.highlights-title {
+  font-family: var(--font-d);
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  color: var(--card-text);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.highlight-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.highlight-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.highlight-value {
+  font-family: var(--font-d);
+  font-size: 28px;
+  color: var(--surface);
+  line-height: 1;
+}
+
+.dark .highlight-value {
+  color: var(--accent);
+}
+
+.highlight-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stats-toggle-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid var(--surface-hi);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  transition: var(--ease);
+}
+
+.stats-toggle-btn:hover {
+  background: var(--surface-mid);
+}
+
+.btn-share,
+.btn-copy {
+  flex: 1;
+  padding: 16px 20px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid var(--surface-hi);
+  border-radius: var(--radius);
+  transition: var(--ease);
+}
+
+.btn-share:hover,
+.btn-copy:hover {
+  background: var(--surface-mid);
+  border-color: var(--accent);
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.result-actions-secondary {
+  display: flex;
+  gap: 12px;
+}
+
+/* Confetti animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -10px;
+    opacity: 1;
+    transform: translateX(0) rotateZ(0deg);
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+    transform: translateX(calc(50px - 100px * var(--random, 0.5))) rotateZ(720deg);
+  }
+}
+
+/* Dark mode adjustments */
+.dark .summary-card {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.dark .summary-card-team {
+  color: var(--text);
+}
+
+.dark .result-highlights {
+  background: var(--surface);
+}
+
+.dark .highlights-title {
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════════════════
+   FINAL FIXES - Toast positioning & Button styling
+   ═══════════════════════════════════════════════════ */
+
+/* Fix toast container to stay within app viewport */
+@media (min-width: 480px) {
+  .toast-container {
+    right: calc(50% - 240px + 20px);
+    max-width: 440px;
+  }
+}
+
+/* Better result screen button styling */
+.btn-share,
+.btn-copy {
+  background: var(--surface-mid);
+  border-color: var(--accent);
+}
+
+.btn-share:hover,
+.btn-copy:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.dark .btn-share,
+.dark .btn-copy {
+  background: var(--surface-mid);
+  border-color: var(--accent);
+}
+
+.dark .btn-share:hover,
+.dark .btn-copy:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Ensure result screen trophy banner shows up */
+.result-banner {
+  background: linear-gradient(135deg, var(--surface), var(--surface-mid)) !important;
+  border: 2px solid var(--accent) !important;
 }
