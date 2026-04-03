@@ -825,26 +825,7 @@ input { font-family: var(--font-b); }
 }
 
 /* ── Animation Overlay ─────────────────────────── */
-.anim-overlay {
-  position: absolute; 
-  inset: 0; 
-  z-index: 300;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  pointer-events: none;
-  animation: animFade 1.8s ease forwards;
-}
-@keyframes animFade { 0%{opacity:0} 20%{opacity:1} 70%{opacity:1} 100%{opacity:0} }
-.anim-content { text-align: center; animation: animPop 1.8s ease forwards; }
-@keyframes animPop { 0%{transform:scale(0.3) rotate(-8deg)} 30%{transform:scale(1.2) rotate(2deg)} 50%{transform:scale(1)} 100%{transform:scale(1.4)} }
-.anim-emoji { font-size: 80px; line-height: 1; margin-bottom: 8px; }
-.anim-text  { font-family: var(--font-d); font-size: 76px; letter-spacing: 4px; line-height: 1; }
-.anim-four   { background: rgba(49,130,206,0.88);  } .anim-four .anim-text   { color:#fff; }
-.anim-six    { background: rgba(236,201,75,0.92);  } .anim-six .anim-text    { color:#1a1a1a; }
-.anim-wicket { background: rgba(229,62,62,0.88);   } .anim-wicket .anim-text { color:#fff; }
-.anim-impact { background: rgba(245,166,35,0.92);  } .anim-impact .anim-text { color:#1a1a1a; }
-.anim-over   { background: rgba(0,0,0,0.88);       } .anim-over .anim-text   { color:var(--text); }
+
 
 /* ── Result Screen ─────────────────────────────── */
 .result-screen { 
@@ -1866,129 +1847,51 @@ input { font-family: var(--font-b); }
 }
 
 /* ═══════════════════════════════════════════════════
-   ANIMATION OVERLAY - CONSTRAINED TO APP
+   ANIMATION OVERLAY
    ═══════════════════════════════════════════════════ */
 
 .anim-overlay {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
-  height: 100%;
-  z-index: 9999;
+  position: absolute;
+  inset: 0;
+  z-index: 300;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.7);
-  animation: anim-fade-out 1.5s ease-out forwards;
+  animation: animFade 1.8s ease forwards;
 }
 
 .anim-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 32px 40px;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 24px;
-  border: 3px solid;
-  animation: anim-zoom-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  text-align: center;
+  animation: animPop 0.75s ease forwards;
 }
 
-.anim-emoji {
-  font-size: 100px;
-  line-height: 1;
-  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+.anim-emoji { font-size: 80px; line-height: 1; margin-bottom: 8px; }
+
+.anim-image {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
-.anim-text {
-  font-family: var(--font-d);
-  font-size: 56px;
-  letter-spacing: 6px;
-  font-weight: 700;
-  line-height: 1;
+.anim-text  { font-family: var(--font-d); font-size: 76px; letter-spacing: 4px; line-height: 1; }
+
+.anim-four   { background: rgba(49,130,206,0.88);  } .anim-four .anim-text   { color:#fff; }
+.anim-six    { background: rgba(236,201,75,0.92);  } .anim-six .anim-text    { color:#1a1a1a; }
+.anim-wicket { background: rgba(229,62,62,0.88);   } .anim-wicket .anim-text { color:#fff; }
+.anim-impact { background: rgba(245,166,35,0.92);  } .anim-impact .anim-text { color:#1a1a1a; }
+.anim-over   { background: rgba(0,0,0,0.88);       } .anim-over .anim-text   { color:var(--text); }
+
+@keyframes animFade { 0%{opacity:0} 20%{opacity:1} 70%{opacity:1} 100%{opacity:0} }
+
+@keyframes animPop {
+  0%   { transform: scale(0.3) rotate(0deg);    opacity: 0; }
+  25%  { transform: scale(1.1) rotate(360deg);  opacity: 1; }
+  55%  { transform: scale(1.0) rotate(720deg); }
+  80%  { transform: scale(1.0) rotate(1080deg); }
+  90%  { transform: scale(1.05); }
+  100% { transform: scale(1)   rotate(1080deg); }
 }
 
-/* Color variants */
-.anim-four .anim-content {
-  border-color: #3182ce;
-  box-shadow: 0 0 40px rgba(49, 130, 206, 0.5);
-}
-
-.anim-four .anim-text {
-  color: #60a5fa;
-  text-shadow: 0 0 30px rgba(96, 165, 250, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.anim-six .anim-content {
-  border-color: #ecc94b;
-  box-shadow: 0 0 40px rgba(236, 201, 75, 0.5);
-}
-
-.anim-six .anim-text {
-  color: #fbbf24;
-  text-shadow: 0 0 30px rgba(251, 191, 36, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.anim-wicket .anim-content {
-  border-color: #e53e3e;
-  box-shadow: 0 0 40px rgba(229, 62, 62, 0.5);
-}
-
-.anim-wicket .anim-text {
-  color: #f87171;
-  text-shadow: 0 0 30px rgba(248, 113, 113, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.anim-impact .anim-content {
-  border-color: var(--accent);
-  box-shadow: 0 0 40px rgba(217, 101, 79, 0.5);
-}
-
-.anim-impact .anim-text {
-  color: var(--accent);
-  text-shadow: 0 0 30px rgba(217, 101, 79, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.anim-over .anim-content {
-  border-color: var(--accent2);
-  box-shadow: 0 0 40px rgba(217, 199, 168, 0.5);
-}
-
-.anim-over .anim-text {
-  color: var(--accent2);
-  text-shadow: 0 0 30px rgba(217, 199, 168, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-/* Animations */
-@keyframes anim-fade-out {
-  0% { opacity: 1; }
-  60% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes anim-zoom-bounce {
-  0% {
-    transform: scale(0) rotate(-180deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-/* Desktop: ensure overlay stays within app bounds */
-@media (min-width: 480px) {
-  .anim-overlay {
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 480px;
-  }
-}
